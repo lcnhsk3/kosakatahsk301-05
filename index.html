@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="google" content="notranslate" />
+    <title>HSK3 KOSAKATA</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a2e;
+            font-family: 'SimSun', 'NSimSun', '宋体', serif;
+            padding: 12px;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 9 / 16;
+            background: linear-gradient(145deg, #f9d976 0%, #f39f86 30%, #fdfcfb 70%, #a8edea 100%);
+            border-radius: 36px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+            padding: 18px 16px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -20%;
+            width: 70%; height: 70%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            bottom: -10%; left: -10%;
+            width: 60%; height: 60%;
+            background: radial-gradient(circle, rgba(72, 219, 251, 0.20) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-bottom: 6px;
+            flex-shrink: 0;
+        }
+        .header h1 {
+            font-size: clamp(18px, 4.2vw, 30px);
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #6a3093, #a044ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header .sub {
+            font-size: clamp(10px, 2.2vw, 16px);
+            color: #4a3a6a;
+            letter-spacing: 4px;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-top: -2px;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.6);
+        }
+        .header .sub span {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.35);
+            padding: 0 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .package-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: nowrap;
+        }
+        .package-btn {
+            font-family: inherit;
+            font-size: clamp(13px, 2.6vw, 17px);
+            font-weight: 700;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.85);
+            color: #3d2a5a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .package-btn:active { transform: scale(0.92); }
+        .package-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+        .package-select {
+            font-family: inherit;
+            font-size: clamp(11px, 2.3vw, 15px);
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.85);
+            color: #3d2a5a;
+            outline: none;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+            min-width: 0;
+            max-width: 260px;
+        }
+        .package-code {
+            font-size: clamp(11px, 2.3vw, 15px);
+            color: #3d2a5a;
+            font-weight: 700;
+            background: rgba(255,215,0,0.55);
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,215,0,0.6);
+            flex-shrink: 0;
+        }
+
+        .card-wrapper {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            min-height: 0;
+            perspective: 1200px;
+            margin: 6px 0 8px 0;
+            cursor: pointer;
+        }
+
+        .card-flipper {
+            position: relative;
+            width: 100%; height: 100%;
+            transition: transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            border-radius: 28px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .card-flipper.flipped { transform: rotateY(180deg); }
+
+        .card-face {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 22px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(6px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+
+        .card-front {
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.92));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .card-front.is-marked {
+            border: 2px solid rgba(255, 200, 0, 0.8);
+            box-shadow: inset 0 0 40px rgba(255, 215, 0, 0.2), 0 0 24px rgba(255, 200, 0, 0.45);
+        }
+        .card-front .hanzi {
+            font-size: clamp(68px, 15vw, 120px);
+            font-weight: 700;
+            color: #1a0a2e;
+            text-shadow: 0 4px 20px rgba(255, 200, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.05);
+            line-height: 1.2;
+            text-align: center;
+            word-break: break-word;
+        }
+        .card-front .tap-hint {
+            position: absolute;
+            bottom: 18px;
+            font-size: clamp(11px, 2vw, 14px);
+            color: #8888aa;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 4px 18px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+        }
+        .card-front .index-badge {
+            position: absolute;
+            top: 14px; right: 16px;
+            font-size: clamp(13px, 2.4vw, 18px);
+            color: #aaaacc;
+            font-weight: 300;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 2px 14px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-front .mark-btn {
+            position: absolute;
+            top: 12px; left: 14px;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: 2px solid rgba(200, 170, 40, 0.5);
+            background: rgba(255, 255, 255, 0.85);
+            color: #b8a030;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            z-index: 5;
+            padding: 0;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .card-front .mark-btn:hover {
+            transform: scale(1.08);
+            background: rgba(255, 250, 230, 0.95);
+        }
+        .card-front .mark-btn:active { transform: scale(0.9); }
+        .card-front .mark-btn.marked {
+            background: linear-gradient(135deg, #ffd54a, #ffb300);
+            color: #fff;
+            border-color: #ffb300;
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.7), 0 2px 10px rgba(0, 0, 0, 0.15);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(160deg, #fefefe, #f5f0ff);
+            border: 2px solid rgba(160, 120, 255, 0.25);
+            justify-content: flex-start;
+            padding-top: 20px;
+            gap: 4px;
+            overflow-y: auto;
+        }
+        .card-back::-webkit-scrollbar { width: 3px; }
+        .card-back::-webkit-scrollbar-thumb { background: #c0b0d0; border-radius: 10px; }
+
+        .card-back .back-pinyin {
+            font-size: clamp(22px, 5vw, 38px);
+            color: #e85d75;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+        .card-back .back-arti {
+            font-size: clamp(16px, 3.6vw, 28px);
+            color: #2d1b4e;
+            font-weight: 500;
+            background: rgba(232, 93, 117, 0.08);
+            padding: 4px 18px;
+            border-radius: 30px;
+            margin: 2px 0 8px 0;
+            text-align: center;
+        }
+        .card-back .contoh-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 0 4px;
+        }
+        .card-back .contoh-label {
+            font-size: clamp(12px, 2.2vw, 16px);
+            color: #8870aa;
+            letter-spacing: 3px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        .card-back .contoh-hanzi {
+            font-size: clamp(18px, 4vw, 32px);
+            color: #1a0a2e;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
+            padding: 4px 0;
+            word-break: break-word;
+        }
+        .card-back .contoh-pinyin {
+            font-size: clamp(14px, 3vw, 22px);
+            color: #e85d75;
+            font-weight: 400;
+            text-align: center;
+            line-height: 1.5;
+            opacity: 0.9;
+            word-break: break-word;
+        }
+        .card-back .contoh-arti {
+            font-size: clamp(14px, 3vw, 22px);
+            color: #4a3a6a;
+            font-weight: 400;
+            text-align: center;
+            line-height: 1.5;
+            background: rgba(160, 120, 255, 0.07);
+            padding: 4px 16px;
+            border-radius: 30px;
+            margin-top: 2px;
+            word-break: break-word;
+        }
+        .card-back .back-tap-hint {
+            position: absolute;
+            bottom: 14px;
+            font-size: clamp(10px, 1.8vw, 13px);
+            color: #aaaacc;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 2px 16px;
+            border-radius: 30px;
+        }
+        .card-back .mark-badge {
+            position: absolute;
+            top: 14px; left: 16px;
+            font-size: clamp(13px, 2.4vw, 18px);
+            color: #b8860b;
+            font-weight: 700;
+            background: rgba(255, 215, 0, 0.35);
+            padding: 2px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 200, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .dot-deco {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin: 2px 0 4px 0;
+        }
+        .dot-deco span {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #d0b0e0;
+            opacity: 0.4;
+        }
+        .dot-deco span:nth-child(2) { background: #e85d75; opacity: 0.5; }
+        .dot-deco span:nth-child(3) { background: #48dbfb; opacity: 0.4; }
+
+        .card-back .content-wrap {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            gap: 2px;
+            padding: 4px 0;
+        }
+
+        .highlight-word { color: #e85d75; font-weight: 700; }
+
+        .nav-bar {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            padding: 6px 0 0 0;
+            gap: 4px;
+        }
+        .nav-btn {
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            border: none;
+            border-radius: 40px;
+            padding: 8px 14px;
+            font-size: clamp(13px, 2.8vw, 20px);
+            font-weight: 600;
+            color: #3d2a5a;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            min-width: 44px;
+            justify-content: center;
+            white-space: nowrap;
+        }
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .nav-btn:active:not(:disabled) { transform: scale(0.94); }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none !important; }
+
+        .nav-btn.prev-btn { background: rgba(255, 215, 0, 0.6); border-color: rgba(255, 215, 0, 0.3); }
+        .nav-btn.prev-btn:hover:not(:disabled) { background: rgba(255, 215, 0, 0.85); }
+        .nav-btn.next-btn { background: rgba(72, 219, 251, 0.6); border-color: rgba(72, 219, 251, 0.3); }
+        .nav-btn.next-btn:hover:not(:disabled) { background: rgba(72, 219, 251, 0.85); }
+        .nav-btn.random-btn {
+            background: rgba(255, 150, 100, 0.6);
+            border-color: rgba(255, 150, 100, 0.3);
+            font-size: clamp(12px, 2.6vw, 18px);
+        }
+        .nav-btn.random-btn:hover:not(:disabled) { background: rgba(255, 150, 100, 0.85); }
+        .nav-btn.mark-filter-btn {
+            background: rgba(255, 215, 0, 0.55);
+            border-color: rgba(255, 200, 0, 0.4);
+            font-size: clamp(12px, 2.6vw, 18px);
+        }
+        .nav-btn.mark-filter-btn.active {
+            background: linear-gradient(135deg, #ffd54a, #ffb300);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(255, 179, 0, 0.6);
+        }
+
+        .nav-counter {
+            font-size: clamp(13px, 2.6vw, 20px);
+            color: #3d2a5a;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 4px 14px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            min-width: 50px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 440px) {
+            .phone-frame { border-radius: 24px; padding: 12px 10px 10px 10px; }
+            .card-face { padding: 16px 12px; border-radius: 20px; }
+            .card-flipper { border-radius: 20px; }
+            .nav-btn { padding: 5px 8px; min-width: 34px; border-radius: 30px; font-size: clamp(10px, 2.2vw, 14px); }
+            .nav-counter { min-width: 40px; padding: 2px 8px; font-size: clamp(10px, 2vw, 14px); }
+            .card-front .mark-btn { width: 38px; height: 38px; font-size: 20px; top: 10px; left: 10px; }
+        }
+
+        @media (max-height: 700px) {
+            .header h1 { font-size: clamp(14px, 3.6vw, 20px); }
+            .header .sub { font-size: clamp(8px, 1.8vw, 12px); }
+            .card-front .hanzi { font-size: clamp(48px, 12vw, 80px); }
+            .card-back .back-pinyin { font-size: clamp(16px, 4vw, 26px); }
+            .card-back .back-arti { font-size: clamp(12px, 3vw, 20px); }
+            .card-back .contoh-hanzi { font-size: clamp(14px, 3.2vw, 22px); }
+            .card-back .contoh-pinyin { font-size: clamp(11px, 2.4vw, 16px); }
+            .card-back .contoh-arti { font-size: clamp(11px, 2.4vw, 16px); }
+        }
+        @media (max-height: 600px) {
+            .card-front .hanzi { font-size: clamp(36px, 10vw, 60px); }
+            .card-back .back-pinyin { font-size: clamp(14px, 3.2vw, 20px); }
+            .card-back .back-arti { font-size: clamp(10px, 2.4vw, 16px); }
+            .card-back .contoh-hanzi { font-size: clamp(12px, 2.6vw, 18px); }
+            .card-back .contoh-pinyin { font-size: clamp(10px, 2vw, 14px); }
+            .card-back .contoh-arti { font-size: clamp(10px, 2vw, 14px); }
+            .header h1 { font-size: clamp(12px, 3vw, 16px); }
+            .header .sub { font-size: clamp(7px, 1.4vw, 10px); }
+        }
+        .card-wrapper:active .card-front .hanzi { transform: scale(0.96); }
+        .card-back { scrollbar-width: thin; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="phone-frame" id="app">
+        <div class="header">
+            <h1>✦ HSK3 KOSAKATA ✦</h1>
+            <div class="package-row">
+                <button class="package-btn" id="pkgPrev" title="Paket sebelumnya">◀</button>
+                <select id="packageSelect" class="package-select"></select>
+                <button class="package-btn" id="pkgNext" title="Paket berikutnya">▶</button>
+                <span class="package-code" id="packageCode">ALL</span>
+            </div>
+            <div class="sub"><span>by LCN Palembang</span></div>
+        </div>
+
+        <div class="card-wrapper" id="cardWrapper">
+            <div class="card-flipper" id="cardFlipper">
+                <div class="card-face card-front" id="cardFront">
+                    <button class="mark-btn" id="markBtn" title="Tandai kata ini (tidak tahu)">☆</button>
+                    <div class="index-badge" id="frontIndex">1 / 79</div>
+                    <div class="hanzi" id="hanziDisplay">周末</div>
+                    <div class="tap-hint">👆 klik untuk melihat</div>
+                </div>
+                <div class="card-face card-back" id="cardBack">
+                    <div class="mark-badge" id="markBadge" style="display:none;">★ DITANDAI</div>
+                    <div class="content-wrap">
+                        <div class="back-pinyin" id="pinyinDisplay">zhōu mò</div>
+                        <div class="back-arti" id="artiDisplay">akhir pekan</div>
+                        <div class="dot-deco"><span></span><span></span><span></span></div>
+                        <div class="contoh-section">
+                            <div class="contoh-label">— Contoh Kalimat —</div>
+                            <div class="contoh-hanzi" id="contohHanzi">周末你有什么打算？</div>
+                            <div class="contoh-pinyin" id="contohPinyin">Zhōumò nǐ yǒu shénme dǎsuàn?</div>
+                            <div class="contoh-arti" id="contohArti">Apa rencanamu akhir pekan ini?</div>
+                        </div>
+                    </div>
+                    <div class="back-tap-hint">👆 klik untuk kembali</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <button class="nav-btn prev-btn" id="prevBtn" disabled>◀ Prev</button>
+            <div class="nav-counter" id="navCounter">1 / 79</div>
+            <button class="nav-btn mark-filter-btn" id="markFilterBtn" title="Tampilkan hanya kata yang ditandai">★ <span id="markCount">0</span></button>
+            <button class="nav-btn random-btn" id="randomBtn">🎲</button>
+            <button class="nav-btn next-btn" id="nextBtn">Next ▶</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  DATA KOSAKATA HSK3 — 5 Pelajaran (79 kata)
+        // ============================================================
+        const baseData = [
+            // ================= 第一课 周末你有什么打算 =================
+            { lesson: 1, hanzi: '周末', pinyin: 'zhōu mò', arti: 'akhir pekan', contoh: '周末你有什么打算？', contohPinyin: 'Zhōumò nǐ yǒu shénme dǎsuàn?', contohArti: 'Apa rencanamu akhir pekan ini?' },
+            { lesson: 1, hanzi: '打算', pinyin: 'dǎ suàn', arti: 'berencana, rencana', contoh: '我打算去旅游。', contohPinyin: 'Wǒ dǎsuàn qù lǚyóu.', contohArti: 'Saya berencana pergi berlibur.' },
+            { lesson: 1, hanzi: '啊', pinyin: 'a', arti: 'ah (partikel)', contoh: '啊，是你啊！', contohPinyin: 'A, shì nǐ a!', contohArti: 'Ah, kamu ya!' },
+            { lesson: 1, hanzi: '跟', pinyin: 'gēn', arti: 'dengan, bersama', contoh: '我跟他一起去。', contohPinyin: 'Wǒ gēn tā yīqǐ qù.', contohArti: 'Saya pergi bersamanya.' },
+            { lesson: 1, hanzi: '一直', pinyin: 'yī zhí', arti: 'terus, selalu', contoh: '他一直在学习。', contohPinyin: 'Tā yīzhí zài xuéxí.', contohArti: 'Dia terus belajar.' },
+            { lesson: 1, hanzi: '游戏', pinyin: 'yóu xì', arti: 'permainan, game', contoh: '我喜欢玩游戏。', contohPinyin: 'Wǒ xǐhuān wán yóuxì.', contohArti: 'Saya suka bermain game.' },
+            { lesson: 1, hanzi: '作业', pinyin: 'zuò yè', arti: 'PR, pekerjaan rumah', contoh: '我要做作业。', contohPinyin: 'Wǒ yào zuò zuòyè.', contohArti: 'Saya mau mengerjakan PR.' },
+            { lesson: 1, hanzi: '着急', pinyin: 'zháo jí', arti: 'cemas, khawatir', contoh: '别着急！', contohPinyin: 'Bié zháojí!', contohArti: 'Jangan cemas!' },
+            { lesson: 1, hanzi: '复习', pinyin: 'fù xí', arti: 'mengulang pelajaran', contoh: '我要复习生词。', contohPinyin: 'Wǒ yào fùxí shēngcí.', contohArti: 'Saya mau mengulang kosakata.' },
+            { lesson: 1, hanzi: '南方', pinyin: 'nán fāng', arti: 'bagian selatan', contoh: '南方很热。', contohPinyin: 'Nánfāng hěn rè.', contohArti: 'Bagian selatan sangat panas.' },
+            { lesson: 1, hanzi: '北方', pinyin: 'běi fāng', arti: 'bagian utara', contoh: '北方很冷。', contohPinyin: 'Běifāng hěn lěng.', contohArti: 'Bagian utara sangat dingin.' },
+            { lesson: 1, hanzi: '面包', pinyin: 'miàn bāo', arti: 'roti', contoh: '我早餐吃面包。', contohPinyin: 'Wǒ zǎocān chī miànbāo.', contohArti: 'Saya sarapan roti.' },
+            { lesson: 1, hanzi: '带', pinyin: 'dài', arti: 'membawa', contoh: '请带伞。', contohPinyin: 'Qǐng dài sǎn.', contohArti: 'Tolong bawa payung.' },
+            { lesson: 1, hanzi: '地图', pinyin: 'dì tú', arti: 'peta', contoh: '我需要一张地图。', contohPinyin: 'Wǒ xūyào yī zhāng dìtú.', contohArti: 'Saya butuh sebuah peta.' },
+            { lesson: 1, hanzi: '搬', pinyin: 'bān', arti: 'memindahkan', contoh: '我要搬家。', contohPinyin: 'Wǒ yào bānjiā.', contohArti: 'Saya mau pindah rumah.' },
+
+            // ================= 第二课 他什么时候回来 =================
+            { lesson: 2, hanzi: '腿', pinyin: 'tuǐ', arti: 'kaki (tungkai)', contoh: '我的腿很疼。', contohPinyin: 'Wǒ de tuǐ hěn téng.', contohArti: 'Kaki saya sakit.' },
+            { lesson: 2, hanzi: '疼', pinyin: 'téng', arti: 'sakit', contoh: '我头很疼。', contohPinyin: 'Wǒ tóu hěn téng.', contohArti: 'Kepala saya sakit.' },
+            { lesson: 2, hanzi: '脚', pinyin: 'jiǎo', arti: 'kaki', contoh: '我的脚很大。', contohPinyin: 'Wǒ de jiǎo hěn dà.', contohArti: 'Kaki saya besar.' },
+            { lesson: 2, hanzi: '树', pinyin: 'shù', arti: 'pohon', contoh: '门前有一棵树。', contohPinyin: 'Mén qián yǒu yī kē shù.', contohArti: 'Di depan pintu ada pohon.' },
+            { lesson: 2, hanzi: '容易', pinyin: 'róng yì', arti: 'mudah', contoh: '这道题很容易。', contohPinyin: 'Zhè dào tí hěn róngyì.', contohArti: 'Soal ini sangat mudah.' },
+            { lesson: 2, hanzi: '难', pinyin: 'nán', arti: 'sulit', contoh: '汉语不难。', contohPinyin: 'Hànyǔ bù nán.', contohArti: 'Bahasa Mandarin tidak sulit.' },
+            { lesson: 2, hanzi: '太太', pinyin: 'tài tai', arti: 'nyonya, istri', contoh: '王太太在家。', contohPinyin: 'Wáng tàitai zài jiā.', contohArti: 'Nyonya Wang ada di rumah.' },
+            { lesson: 2, hanzi: '秘书', pinyin: 'mì shū', arti: 'sekretaris', contoh: '她是经理的秘书。', contohPinyin: 'Tā shì jīnglǐ de mìshū.', contohArti: 'Dia sekretaris manajer.' },
+            { lesson: 2, hanzi: '经理', pinyin: 'jīng lǐ', arti: 'manajer', contoh: '经理在办公室。', contohPinyin: 'Jīnglǐ zài bàngōngshì.', contohArti: 'Manajer ada di kantor.' },
+            { lesson: 2, hanzi: '办公室', pinyin: 'bàn gōng shì', arti: 'kantor', contoh: '我的办公室很大。', contohPinyin: 'Wǒ de bàngōngshì hěn dà.', contohArti: 'Kantor saya besar.' },
+            { lesson: 2, hanzi: '辆', pinyin: 'liàng', arti: '(penghitung kendaraan)', contoh: '一辆车。', contohPinyin: 'Yī liàng chē.', contohArti: 'Sebuah mobil.' },
+            { lesson: 2, hanzi: '楼', pinyin: 'lóu', arti: 'lantai, gedung', contoh: '我住在三楼。', contohPinyin: 'Wǒ zhù zài sān lóu.', contohArti: 'Saya tinggal di lantai tiga.' },
+            { lesson: 2, hanzi: '拿', pinyin: 'ná', arti: 'mengambil, membawa', contoh: '请拿一下我的书。', contohPinyin: 'Qǐng ná yīxià wǒ de shū.', contohArti: 'Tolong ambilkan buku saya.' },
+            { lesson: 2, hanzi: '把', pinyin: 'bǎ', arti: '(preposisi untuk objek)', contoh: '请把门关上。', contohPinyin: 'Qǐng bǎ mén guān shàng.', contohArti: 'Tolong tutup pintunya.' },
+            { lesson: 2, hanzi: '伞', pinyin: 'sǎn', arti: 'payung', contoh: '我带了一把伞。', contohPinyin: 'Wǒ dài le yī bǎ sǎn.', contohArti: 'Saya membawa sebuah payung.' },
+            { lesson: 2, hanzi: '胖', pinyin: 'pàng', arti: 'gemuk', contoh: '他有点胖。', contohPinyin: 'Tā yǒudiǎn pàng.', contohArti: 'Dia agak gemuk.' },
+            { lesson: 2, hanzi: '其实', pinyin: 'qí shí', arti: 'sebenarnya', contoh: '其实我不知道。', contohPinyin: 'Qíshí wǒ bù zhīdào.', contohArti: 'Sebenarnya saya tidak tahu.' },
+            { lesson: 2, hanzi: '瘦', pinyin: 'shòu', arti: 'kurus', contoh: '她很瘦。', contohPinyin: 'Tā hěn shòu.', contohArti: 'Dia sangat kurus.' },
+
+            // ================= 第三课 桌子上放着很多饮料 =================
+            { lesson: 3, hanzi: '还是', pinyin: 'hái shì', arti: 'atau', contoh: '你喝茶还是咖啡？', contohPinyin: 'Nǐ hē chá háishì kāfēi?', contohArti: 'Kamu minum teh atau kopi?' },
+            { lesson: 3, hanzi: '爬山', pinyin: 'pá shān', arti: 'mendaki gunung', contoh: '周末我们去爬山。', contohPinyin: 'Zhōumò wǒmen qù páshān.', contohArti: 'Akhir pekan kita mendaki gunung.' },
+            { lesson: 3, hanzi: '小心', pinyin: 'xiǎo xīn', arti: 'hati-hati', contoh: '路上小心！', contohPinyin: 'Lùshang xiǎoxīn!', contohArti: 'Hati-hati di jalan!' },
+            { lesson: 3, hanzi: '条', pinyin: 'tiáo', arti: '(penghitung panjang)', contoh: '一条裤子。', contohPinyin: 'Yī tiáo kùzi.', contohArti: 'Sebuah celana.' },
+            { lesson: 3, hanzi: '裤子', pinyin: 'kù zi', arti: 'celana', contoh: '这条裤子很好看。', contohPinyin: 'Zhè tiáo kùzi hěn hǎokàn.', contohArti: 'Celana ini bagus.' },
+            { lesson: 3, hanzi: '记得', pinyin: 'jì de', arti: 'ingat', contoh: '我记得你。', contohPinyin: 'Wǒ jìde nǐ.', contohArti: 'Saya ingat kamu.' },
+            { lesson: 3, hanzi: '衬衫', pinyin: 'chèn shān', arti: 'kemeja', contoh: '他穿白色衬衫。', contohPinyin: 'Tā chuān báisè chènshān.', contohArti: 'Dia memakai kemeja putih.' },
+            { lesson: 3, hanzi: '元', pinyin: 'yuán', arti: 'yuan (mata uang)', contoh: '这本书二十元。', contohPinyin: 'Zhè běn shū èrshí yuán.', contohArti: 'Buku ini dua puluh yuan.' },
+            { lesson: 3, hanzi: '新鲜', pinyin: 'xīn xiān', arti: 'segar', contoh: '水果很新鲜。', contohPinyin: 'Shuǐguǒ hěn xīnxiān.', contohArti: 'Buahnya sangat segar.' },
+            { lesson: 3, hanzi: '甜', pinyin: 'tián', arti: 'manis', contoh: '这个蛋糕很甜。', contohPinyin: 'Zhège dàngāo hěn tián.', contohArti: 'Kue ini sangat manis.' },
+            { lesson: 3, hanzi: '只', pinyin: 'zhī', arti: '(penghitung hewan)', contoh: '一只猫。', contohPinyin: 'Yī zhī māo.', contohArti: 'Seekor kucing.' },
+            { lesson: 3, hanzi: '放', pinyin: 'fàng', arti: 'meletakkan', contoh: '请把书放在桌子上。', contohPinyin: 'Qǐng bǎ shū fàng zài zhuōzi shàng.', contohArti: 'Tolong letakkan buku di meja.' },
+            { lesson: 3, hanzi: '饮料', pinyin: 'yǐn liào', arti: 'minuman', contoh: '我想喝饮料。', contohPinyin: 'Wǒ xiǎng hē yǐnliào.', contohArti: 'Saya ingin minum minuman.' },
+            { lesson: 3, hanzi: '或者', pinyin: 'huò zhě', arti: 'atau', contoh: '茶或者咖啡都可以。', contohPinyin: 'Chá huòzhě kāfēi dōu kěyǐ.', contohArti: 'Teh atau kopi keduanya boleh.' },
+            { lesson: 3, hanzi: '舒服', pinyin: 'shū fu', arti: 'nyaman', contoh: '这张床很舒服。', contohPinyin: 'Zhè zhāng chuáng hěn shūfu.', contohArti: 'Tempat tidur ini sangat nyaman.' },
+            { lesson: 3, hanzi: '花', pinyin: 'huā', arti: 'bunga', contoh: '花很漂亮。', contohPinyin: 'Huā hěn piàoliang.', contohArti: 'Bunganya cantik.' },
+            { lesson: 3, hanzi: '绿', pinyin: 'lǜ', arti: 'hijau', contoh: '树叶是绿的。', contohPinyin: 'Shùyè shì lǜ de.', contohArti: 'Daun pohon berwarna hijau.' },
+
+            // ================= 第四课 她总是笑着跟客人说话 =================
+            { lesson: 4, hanzi: '比赛', pinyin: 'bǐ sài', arti: 'pertandingan', contoh: '明天有足球比赛。', contohPinyin: 'Míngtiān yǒu zúqiú bǐsài.', contohArti: 'Besok ada pertandingan sepak bola.' },
+            { lesson: 4, hanzi: '照片', pinyin: 'zhào piàn', arti: 'foto', contoh: '这是我家的照片。', contohPinyin: 'Zhè shì wǒ jiā de zhàopiàn.', contohArti: 'Ini foto keluargaku.' },
+            { lesson: 4, hanzi: '年级', pinyin: 'nián jí', arti: 'tingkat kelas', contoh: '我上三年级。', contohPinyin: 'Wǒ shàng sān niánjí.', contohArti: 'Saya kelas tiga.' },
+            { lesson: 4, hanzi: '又', pinyin: 'yòu', arti: 'lagi', contoh: '他又来了。', contohPinyin: 'Tā yòu lái le.', contohArti: 'Dia datang lagi.' },
+            { lesson: 4, hanzi: '聪明', pinyin: 'cōng ming', arti: 'pintar', contoh: '他很聪明。', contohPinyin: 'Tā hěn cōngming.', contohArti: 'Dia sangat pintar.' },
+            { lesson: 4, hanzi: '热情', pinyin: 'rè qíng', arti: 'antusias, ramah', contoh: '她很热情。', contohPinyin: 'Tā hěn rèqíng.', contohArti: 'Dia sangat ramah.' },
+            { lesson: 4, hanzi: '努力', pinyin: 'nǔ lì', arti: 'berusaha keras', contoh: '他很努力。', contohPinyin: 'Tā hěn nǔlì.', contohArti: 'Dia sangat berusaha keras.' },
+            { lesson: 4, hanzi: '总是', pinyin: 'zǒng shì', arti: 'selalu', contoh: '他总是迟到。', contohPinyin: 'Tā zǒngshì chídào.', contohArti: 'Dia selalu terlambat.' },
+            { lesson: 4, hanzi: '回答', pinyin: 'huí dá', arti: 'menjawab', contoh: '请回答我的问题。', contohPinyin: 'Qǐng huídá wǒ de wèntí.', contohArti: 'Tolong jawab pertanyaan saya.' },
+            { lesson: 4, hanzi: '站', pinyin: 'zhàn', arti: 'berdiri', contoh: '他站在门口。', contohPinyin: 'Tā zhàn zài ménkǒu.', contohArti: 'Dia berdiri di pintu masuk.' },
+            { lesson: 4, hanzi: '饿', pinyin: 'è', arti: 'lapar', contoh: '我很饿。', contohPinyin: 'Wǒ hěn è.', contohArti: 'Saya sangat lapar.' },
+            { lesson: 4, hanzi: '超市', pinyin: 'chāo shì', arti: 'supermarket', contoh: '我去超市买东西。', contohPinyin: 'Wǒ qù chāoshì mǎi dōngxi.', contohArti: 'Saya ke supermarket belanja.' },
+            { lesson: 4, hanzi: '蛋糕', pinyin: 'dàn gāo', arti: 'kue', contoh: '生日蛋糕很好吃。', contohPinyin: 'Shēngrì dàngāo hěn hǎochī.', contohArti: 'Kue ulang tahun enak.' },
+            { lesson: 4, hanzi: '年轻', pinyin: 'nián qīng', arti: 'muda', contoh: '她很年轻。', contohPinyin: 'Tā hěn niánqīng.', contohArti: 'Dia sangat muda.' },
+            { lesson: 4, hanzi: '认真', pinyin: 'rèn zhēn', arti: 'serius, sungguh-sungguh', contoh: '他学习很认真。', contohPinyin: 'Tā xuéxí hěn rènzhēn.', contohArti: 'Dia belajar dengan sungguh-sungguh.' },
+            { lesson: 4, hanzi: '客人', pinyin: 'kè rén', arti: 'tamu', contoh: '客人来了。', contohPinyin: 'Kèrén lái le.', contohArti: 'Tamu datang.' },
+
+            // ================= 第五课 我最近越来越胖了 =================
+            { lesson: 5, hanzi: '发烧', pinyin: 'fā shāo', arti: 'demam', contoh: '我发烧了。', contohPinyin: 'Wǒ fāshāo le.', contohArti: 'Saya demam.' },
+            { lesson: 5, hanzi: '为', pinyin: 'wèi', arti: 'untuk', contoh: '我为你高兴。', contohPinyin: 'Wǒ wèi nǐ gāoxìng.', contohArti: 'Saya senang untukmu.' },
+            { lesson: 5, hanzi: '照顾', pinyin: 'zhào gu', arti: 'merawat', contoh: '我照顾我的妹妹。', contohPinyin: 'Wǒ zhàogù wǒ de mèimei.', contohArti: 'Saya merawat adik saya.' },
+            { lesson: 5, hanzi: '用', pinyin: 'yòng', arti: 'menggunakan', contoh: '我用手机上网。', contohPinyin: 'Wǒ yòng shǒujī shàngwǎng.', contohArti: 'Saya menggunakan HP untuk online.' },
+            { lesson: 5, hanzi: '感冒', pinyin: 'gǎn mào', arti: 'masuk angin, flu', contoh: '我感冒了。', contohPinyin: 'Wǒ gǎnmào le.', contohArti: 'Saya flu.' },
+            { lesson: 5, hanzi: '季节', pinyin: 'jì jié', arti: 'musim', contoh: '春天是最好的季节。', contohPinyin: 'Chūntiān shì zuì hǎo de jìjié.', contohArti: 'Musim semi adalah musim terbaik.' },
+            { lesson: 5, hanzi: '当然', pinyin: 'dāng rán', arti: 'tentu saja', contoh: '当然可以！', contohPinyin: 'Dāngrán kěyǐ!', contohArti: 'Tentu saja boleh!' },
+            { lesson: 5, hanzi: '春天', pinyin: 'chūn tiān', arti: 'musim semi', contoh: '春天来了。', contohPinyin: 'Chūntiān lái le.', contohArti: 'Musim semi tiba.' },
+            { lesson: 5, hanzi: '草', pinyin: 'cǎo', arti: 'rumput', contoh: '草很绿。', contohPinyin: 'Cǎo hěn lǜ.', contohArti: 'Rumputnya hijau.' },
+            { lesson: 5, hanzi: '夏天', pinyin: 'xià tiān', arti: 'musim panas', contoh: '夏天很热。', contohPinyin: 'Xiàtiān hěn rè.', contohArti: 'Musim panas sangat panas.' },
+            { lesson: 5, hanzi: '裙子', pinyin: 'qún zi', arti: 'rok', contoh: '这条裙子很漂亮。', contohPinyin: 'Zhè tiáo qúnzi hěn piàoliang.', contohArti: 'Rok ini cantik.' },
+            { lesson: 5, hanzi: '最近', pinyin: 'zuì jìn', arti: 'akhir-akhir ini', contoh: '我最近很忙。', contohPinyin: 'Wǒ zuìjìn hěn máng.', contohArti: 'Akhir-akhir ini saya sibuk.' },
+            { lesson: 5, hanzi: '越', pinyin: 'yuè', arti: 'semakin', contoh: '越来越好。', contohPinyin: 'Yuè lái yuè hǎo.', contohArti: 'Semakin baik.' }
+        ];
+
+        // ============================================================
+        //  STORAGE — TANDAI KATA
+        // ============================================================
+        const STORAGE_KEY = 'hsk3_marked_words_v1';
+        let markedSet = new Set();
+        try {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            if (Array.isArray(saved)) markedSet = new Set(saved);
+        } catch (e) { markedSet = new Set(); }
+
+        function wordKey(w) { return `L${w.lesson}::${w.hanzi}`; }
+        function isMarked(w) { return markedSet.has(wordKey(w)); }
+        function saveMarks() {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(markedSet))); } catch (e) {}
+        }
+        function toggleMarkOn(w) {
+            const key = wordKey(w);
+            if (markedSet.has(key)) markedSet.delete(key);
+            else markedSet.add(key);
+            saveMarks();
+        }
+        function getMarkedWords() {
+            return baseData.filter(w => markedSet.has(wordKey(w)));
+        }
+
+        // ============================================================
+        //  PAKET
+        // ============================================================
+        const lessonTitles = {
+            1: '第一课 周末你有什么打算',
+            2: '第二课 他什么时候回来',
+            3: '第三课 桌子上放着很多饮料',
+            4: '第四课 她总是笑着跟客人说话',
+            5: '第五课 我最近越来越胖了'
+        };
+
+        const byLesson = {};
+        baseData.forEach(w => {
+            if (!byLesson[w.lesson]) byLesson[w.lesson] = [];
+            byLesson[w.lesson].push(w);
+        });
+
+        const packages = [];
+        Object.keys(byLesson).map(Number).sort((a, b) => a - b).forEach(num => {
+            packages.push({
+                code: `PKT-${String(num).padStart(2, '0')}`,
+                title: lessonTitles[num] || `Pelajaran ${num}`,
+                words: byLesson[num],
+                type: 'lesson'
+            });
+        });
+
+        const MARK_PACKAGE_INDEX = packages.length;
+        packages.push({
+            code: '★',
+            title: 'Kata yang Ditandai',
+            words: [],
+            type: 'marked'
+        });
+
+        const ALL_PACKAGE_INDEX = packages.length;
+        packages.push({
+            code: 'ALL',
+            title: `📚 SEMUA KOSAKATA`,
+            words: [...baseData],
+            type: 'all'
+        });
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let currentPackageIndex = ALL_PACKAGE_INDEX;
+        let currentData = [];
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        const cardFlipper = document.getElementById('cardFlipper');
+        const cardWrapper = document.getElementById('cardWrapper');
+        const cardFront = document.getElementById('cardFront');
+        const hanziDisplay = document.getElementById('hanziDisplay');
+        const frontIndex = document.getElementById('frontIndex');
+        const pinyinDisplay = document.getElementById('pinyinDisplay');
+        const artiDisplay = document.getElementById('artiDisplay');
+        const contohHanzi = document.getElementById('contohHanzi');
+        const contohPinyin = document.getElementById('contohPinyin');
+        const contohArti = document.getElementById('contohArti');
+        const navCounter = document.getElementById('navCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const randomBtn = document.getElementById('randomBtn');
+        const packageSelect = document.getElementById('packageSelect');
+        const packageCode = document.getElementById('packageCode');
+        const pkgPrev = document.getElementById('pkgPrev');
+        const pkgNext = document.getElementById('pkgNext');
+        const markBtn = document.getElementById('markBtn');
+        const markBadge = document.getElementById('markBadge');
+        const markFilterBtn = document.getElementById('markFilterBtn');
+        const markCountEl = document.getElementById('markCount');
+
+        // ============================================================
+        //  RENDER
+        // ============================================================
+        function renderCard(index) {
+            const data = currentData[index];
+            if (!data) {
+                hanziDisplay.textContent = '—';
+                frontIndex.textContent = '0 / 0';
+                navCounter.textContent = '0 / 0';
+                pinyinDisplay.textContent = '';
+                artiDisplay.textContent = '';
+                contohHanzi.textContent = '';
+                contohPinyin.textContent = '';
+                contohArti.textContent = '';
+                markBtn.textContent = '☆';
+                markBtn.classList.remove('marked');
+                cardFront.classList.remove('is-marked');
+                markBadge.style.display = 'none';
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                return;
+            }
+            const total = currentData.length;
+
+            hanziDisplay.textContent = data.hanzi;
+            frontIndex.textContent = `${index + 1} / ${total}`;
+            pinyinDisplay.textContent = data.pinyin;
+            artiDisplay.textContent = data.arti;
+
+            const target = data.hanzi;
+            let contohHtml = data.contoh;
+            if (target && contohHtml) {
+                try {
+                    const escaped = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(escaped, 'g');
+                    contohHtml = contohHtml.replace(regex, '<span class="highlight-word">' + target + '</span>');
+                } catch (err) {}
+            }
+            contohHanzi.innerHTML = contohHtml;
+            contohPinyin.textContent = data.contohPinyin;
+            contohArti.textContent = data.contohArti;
+
+            navCounter.textContent = `${index + 1} / ${total}`;
+            prevBtn.disabled = (index === 0);
+            nextBtn.disabled = (index === total - 1);
+
+            const marked = isMarked(data);
+            markBtn.textContent = marked ? '★' : '☆';
+            markBtn.classList.toggle('marked', marked);
+            cardFront.classList.toggle('is-marked', marked);
+            markBadge.style.display = marked ? 'block' : 'none';
+
+            if (isFlipped) {
+                cardFlipper.classList.remove('flipped');
+                isFlipped = false;
+            }
+        }
+
+        function goTo(index) {
+            if (index < 0 || index >= currentData.length) return;
+            currentIndex = index;
+            renderCard(currentIndex);
+        }
+        function nextCard() { if (currentIndex < currentData.length - 1) goTo(currentIndex + 1); }
+        function prevCard() { if (currentIndex > 0) goTo(currentIndex - 1); }
+
+        // ============================================================
+        //  SHUFFLE
+        // ============================================================
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+            }
+            return arr;
+        }
+        function shuffleCards() {
+            if (currentData.length < 2) return;
+            shuffleArray(currentData);
+            currentIndex = 0;
+            renderCard(0);
+        }
+
+        // ============================================================
+        //  LOAD PACKAGE
+        // ============================================================
+        function loadPackage(index) {
+            if (index < 0 || index >= packages.length) return;
+            currentPackageIndex = index;
+            const pkg = packages[index];
+
+            if (pkg.type === 'marked') {
+                currentData = getMarkedWords();
+                if (currentData.length === 0) {
+                    currentData = [];
+                    currentIndex = 0;
+                    isFlipped = false;
+                    cardFlipper.classList.remove('flipped');
+                    renderCard(0);
+                    packageSelect.value = String(currentPackageIndex);
+                    packageCode.textContent = pkg.code;
+                    pkgPrev.disabled = (currentPackageIndex === 0);
+                    pkgNext.disabled = (currentPackageIndex === packages.length - 1);
+                    return;
+                }
+            } else {
+                currentData = pkg.words.slice();
+            }
+
+            shuffleArray(currentData);
+            currentIndex = 0;
+            isFlipped = false;
+            cardFlipper.classList.remove('flipped');
+            renderCard(0);
+
+            packageSelect.value = String(currentPackageIndex);
+            packageCode.textContent = pkg.code;
+            pkgPrev.disabled = (currentPackageIndex === 0);
+            pkgNext.disabled = (currentPackageIndex === packages.length - 1);
+        }
+
+        // ============================================================
+        //  TANDAI — Update UI
+        // ============================================================
+        function updateMarkCountUI() {
+            const count = markedSet.size;
+            markCountEl.textContent = count;
+            const markOpt = packageSelect.querySelector(`option[value="${MARK_PACKAGE_INDEX}"]`);
+            if (markOpt) {
+                markOpt.textContent = `★ TANDAI · Kata yang Ditandai (${count})`;
+            }
+            markFilterBtn.classList.toggle('active', currentPackageIndex === MARK_PACKAGE_INDEX);
+        }
+
+        function refreshCurrentCardMarkUI() {
+            const data = currentData[currentIndex];
+            if (!data) return;
+            const marked = isMarked(data);
+            markBtn.textContent = marked ? '★' : '☆';
+            markBtn.classList.toggle('marked', marked);
+            cardFront.classList.toggle('is-marked', marked);
+            markBadge.style.display = marked ? 'block' : 'none';
+        }
+
+        function onToggleMark() {
+            const data = currentData[currentIndex];
+            if (!data) return;
+            const wasMarked = isMarked(data);
+            toggleMarkOn(data);
+
+            if (currentPackageIndex === MARK_PACKAGE_INDEX) {
+                if (wasMarked) {
+                    currentData.splice(currentIndex, 1);
+                    if (currentData.length === 0) {
+                        updateMarkCountUI();
+                        renderCard(0);
+                        navCounter.textContent = `0 / 0`;
+                        frontIndex.textContent = `0 / 0`;
+                        prevBtn.disabled = true;
+                        nextBtn.disabled = true;
+                        return;
+                    }
+                    if (currentIndex >= currentData.length) {
+                        currentIndex = currentData.length - 1;
+                    }
+                    renderCard(currentIndex);
+                } else {
+                    refreshCurrentCardMarkUI();
+                }
+            } else {
+                refreshCurrentCardMarkUI();
+            }
+            updateMarkCountUI();
+        }
+
+        // ============================================================
+        //  FLIP
+        // ============================================================
+        function toggleFlip(e) {
+            if (e.target.closest('.nav-btn') || e.target.closest('.nav-bar') ||
+                e.target.closest('.package-select') || e.target.closest('.package-row') ||
+                e.target.closest('.package-btn') || e.target.closest('.mark-btn')) return;
+            cardFlipper.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+
+        // ============================================================
+        //  KEYBOARD
+        // ============================================================
+        function handleKeydown(e) {
+            if (e.key === 'ArrowRight') { e.preventDefault(); nextCard(); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevCard(); }
+            else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleFlip(e); }
+            else if (e.key === 'm' || e.key === 'M') { e.preventDefault(); onToggleMark(); }
+        }
+
+        // ============================================================
+        //  DISABLE FUNCTIONS
+        // ============================================================
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('cut', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+            if (
+                (e.ctrlKey && ['c','C','x','X','a','A','u','U','s','S','p','P'].indexOf(e.key) !== -1) ||
+                e.key === 'F12' ||
+                (e.ctrlKey && e.key === 'F12') ||
+                (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].indexOf(e.key) !== -1) ||
+                e.key === 'PrintScreen'
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        }, true);
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        packages.forEach((pkg, i) => {
+            const opt = document.createElement('option');
+            opt.value = String(i);
+            if (pkg.type === 'marked') {
+                opt.textContent = `★ TANDAI · Kata yang Ditandai (0)`;
+            } else {
+                opt.textContent = `${pkg.code} · ${pkg.title} (${pkg.words.length})`;
+            }
+            packageSelect.appendChild(opt);
+        });
+
+        packageSelect.addEventListener('change', (e) => {
+            loadPackage(parseInt(e.target.value, 10));
+        });
+        pkgPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentPackageIndex > 0) loadPackage(currentPackageIndex - 1);
+        });
+        pkgNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentPackageIndex < packages.length - 1) loadPackage(currentPackageIndex + 1);
+        });
+
+        markBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            onToggleMark();
+        });
+
+        markFilterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentPackageIndex === MARK_PACKAGE_INDEX) {
+                loadPackage(ALL_PACKAGE_INDEX);
+            } else {
+                loadPackage(MARK_PACKAGE_INDEX);
+            }
+        });
+
+        cardWrapper.addEventListener('click', toggleFlip);
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevCard(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextCard(); });
+        randomBtn.addEventListener('click', (e) => { e.stopPropagation(); shuffleCards(); });
+        document.addEventListener('keydown', handleKeydown);
+
+        updateMarkCountUI();
+        loadPackage(ALL_PACKAGE_INDEX);
+
+        // ============================================================
+        //  SWIPE
+        // ============================================================
+        let touchStartX = 0;
+        let touchStartY = 0;
+        cardWrapper.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+        }, { passive: true });
+
+        cardWrapper.addEventListener('touchend', (e) => {
+            if (touchStartX === 0) return;
+            const touchEnd = e.changedTouches[0];
+            const deltaX = touchEnd.clientX - touchStartX;
+            const deltaY = touchEnd.clientY - touchStartY;
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+                if (deltaX < 0) nextCard();
+                else prevCard();
+            }
+            touchStartX = 0;
+            touchStartY = 0;
+        }, { passive: true });
+
+        console.log(`✅ HSK3 KOSAKATA — ${packages.length} paket siap!`);
+        console.log(`📚 Total kosakata: ${baseData.length}`);
+        console.log(`★ Fitur tandai: klik bintang di kiri atas kartu (shortcut: M)`);
+    </script>
+
+</body>
+</html>
